@@ -37,7 +37,7 @@ SMODS.path = ""
 ---@field custom_ui? fun(mod_nodes: table) Allows manipulating this mod's description tab.
 ---@field ui_config? fun(mod_nodes: table) Allows specifying custom values for this mod's menu UI elements.
 ---@field set_ability_reset_keys? fun(): string[] When a card's `ability` table is changed, values with a key matching a string inside the returned table .
----@field reset_game_globals? fun(run_start: boolean) Allows resetting global values every new run or round.
+---@field reset_game_globals? fun(run_start: boolean, round_start: booleen) Allows resetting global values every new run or round.
 ---@field set_debuff? fun(card: Card|table): boolean|string? Allows controlling when a card is debuffed or not. Return `"prevent_debuff"` to force a card to be undebuffable.
 ---@field optional_features? SMODS.optional_features|(fun(): SMODS.optional_features) Table of optional SMODS features to enable inserted into `SMODS.optional_features`. If function, returns table.
 ---@field save_mod_config? fun(mod: Mod) If defined, this funciton will be called over `SMODS.save_mod_config` when SMODS goes to save this mod's config.
