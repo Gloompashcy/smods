@@ -16,9 +16,25 @@ payload = '''
 
 for _, mod in ipairs(SMODS.mod_list) do
 	if mod.reset_game_globals and type(mod.reset_game_globals) == 'function' then
-		mod.reset_game_globals(false)
+		mod.reset_game_globals(false, false)
 	end
 end'''
+
+# new_round()
+[[patches]]
+[patches.regex]
+target = 'functions/state_events.lua'
+pattern = '''(?<indent>[\t ]*)SMODS.calculate_context\(\{setting_blind = true, blind = G.GAME.round_resets.blind\}\)'''
+line_prepend = '$indent'
+position = 'before'
+payload = '''
+for _, mod in ipairs(SMODS.mod_list) do
+	if mod.reset_game_globals and type(mod.reset_game_globals) == 'function' then
+		mod.reset_game_globals(false, true)
+	end
+end
+
+'''
 
 # Game:start_run()
 [[patches]]
@@ -31,7 +47,7 @@ payload = '''
 
 for _, mod in ipairs(SMODS.mod_list) do
 	if mod.reset_game_globals and type(mod.reset_game_globals) == 'function' then
-		mod.reset_game_globals(true)
+		mod.reset_game_globals(true, false)
 	end
 end'''
 
